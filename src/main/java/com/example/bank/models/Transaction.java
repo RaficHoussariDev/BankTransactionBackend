@@ -14,6 +14,12 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Transaction {
+    public Transaction(double amount, Account account) {
+        this.amount = Math.abs(amount);
+        this.type = amount >= 0 ? TransactionEnum.DEPOSIT : TransactionEnum.WITHDRAW;
+        this.account = account;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

@@ -64,6 +64,6 @@ public class AccountController {
             throw new CustomValidationException(List.of("Account " + accountId + " does not have enough money to withdraw this amount"), HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<>(this.accountService.transaction(account.getId(), amount), HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(this.accountService.transaction(account, amount), HttpStatus.NO_CONTENT);
     }
 }

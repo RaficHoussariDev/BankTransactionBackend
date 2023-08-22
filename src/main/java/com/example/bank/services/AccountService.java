@@ -1,8 +1,6 @@
 package com.example.bank.services;
 
 import com.example.bank.dtos.AccountDto;
-import com.example.bank.dtos.TransactionDto;
-import com.example.bank.enums.TransactionEnum;
 import com.example.bank.mappers.AccountMapper;
 import com.example.bank.mappers.TransactionMapper;
 import com.example.bank.models.Account;
@@ -57,32 +55,27 @@ public class AccountService {
     }
 
     @Transactional
-    public Account transaction(Long accountId, Double amount) {
-        log.info("making transaction for account with id {}", accountId);
+    public Account transaction(Account account, Double amount) {
+        log.info("making transaction for account with id {}", account.getId());
 
-        Account account = this.getAccountById(accountId);
-
-        if(account != null) {
-            account.setAmount(account.getAmount() + amount);
-            this.accountRepository.save(account);
-            log.info("account with id {} successfully updated", accountId);
-            this.registerTransaction(account, amount);
-        }
+        account.setAmount(account.getAmount() + amount);
+        this.accountRepository.save(account);
+        log.info("account with id {} successfully updated", account.getId());
+        this.registerTransaction(account, amount);
 
         return account;
     }
 
     @Transactional
-    private void registerTransaction(Account account, Double amount) {
+    private Transaction registerTransaction(Account account, double amount) {
         log.info("registering transaction for account {}", account.getId());
 
-        Transaction transaction = new Transaction();
-        transaction.setType(amount >= 0 ? TransactionEnum.DEPOSIT : TransactionEnum.WITHDRAW);
-        transaction.setAmount(Math.abs(amount));
-        transaction.setAccount(account);
+        Transaction transaction = new Transaction(amount, account);
 
         this.transactionRepository.save(transaction);
 
-        log.info("registered transaction for account {}", account.getId());
+        log.info("successfully registered transaction for account {}", account.getId());
+
+        return transaction;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.bank.services;
 
 import com.example.bank.dtos.AccountDto;
+import com.example.bank.dtos.AccountToGetDto;
 import com.example.bank.mappers.AccountMapper;
 import com.example.bank.mappers.TransactionMapper;
 import com.example.bank.models.Account;
@@ -14,7 +15,9 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -30,6 +33,12 @@ public class AccountService {
         this.accountMapper = accountMapper;
         this.transactionRepository = transactionRepository;
         this.transactionMapper = transactionMapper;
+    }
+
+    public List<AccountToGetDto> getAllAccounts() {
+        List<Account> accounts = this.accountRepository.findAllAccounts();
+
+        return accounts.stream().map(this.accountMapper::entityToAccountToGetDto).collect(Collectors.toList());
     }
 
     @Transactional

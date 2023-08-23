@@ -1,6 +1,7 @@
 package com.example.bank.controllers;
 
 import com.example.bank.dtos.AccountDto;
+import com.example.bank.dtos.AccountToGetDto;
 import com.example.bank.exceptions.CustomValidationException;
 import com.example.bank.exceptions.DtoValidation;
 import com.example.bank.models.Account;
@@ -26,6 +27,13 @@ public class AccountController {
         this.accountService = accountService;
         this.customerService = customerService;
         this.accountDtoValidation = accountDtoValidation;
+    }
+
+    @GetMapping
+    public ResponseEntity<List<AccountToGetDto>> getAccounts() {
+        log.info("fetching all the accounts");
+
+        return new ResponseEntity<>(this.accountService.getAllAccounts(), HttpStatus.OK);
     }
 
     @PostMapping("/create/{customerId}")

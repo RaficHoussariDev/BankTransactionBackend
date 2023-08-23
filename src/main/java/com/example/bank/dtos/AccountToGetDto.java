@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class AccountToGetDto {
     private Double amount;
     private String accountName;
-    private CustomerDto customerDto;
+    private CustomerDto customer;
 }

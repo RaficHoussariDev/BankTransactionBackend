@@ -27,7 +27,7 @@ public class AccountMapper {
 
     public AccountToGetDto entityToAccountToGetDto(Account account) {
         AccountToGetDto accountToGetDto = this.modelMapper.map(account, AccountToGetDto.class);
-        accountToGetDto.setCustomerDto(this.customerMapper.entityToDto(account.getCustomer()));
+        accountToGetDto.setCustomer(this.customerMapper.entityToDto(account.getCustomer()));
 
         return accountToGetDto;
     }

@@ -2,7 +2,8 @@ version: '3'
 services:
   bank:
     build: .
-    container_name: bank-backend
+    image: banksystem
+    container_name: banksystem
     environment:
       DB_URL: jdbc:postgresql://bank-db:5432/bankdb
       DB_USER: admin

@@ -1,5 +1,6 @@
 package com.example.bank.controllers;
 
+import com.example.bank.constants.SwaggerConstants;
 import com.example.bank.dtos.AccountDto;
 import com.example.bank.dtos.AccountToGetDto;
 import com.example.bank.dtos.TransactionToGetDto;
@@ -9,6 +10,8 @@ import com.example.bank.models.Account;
 import com.example.bank.models.Customer;
 import com.example.bank.services.AccountService;
 import com.example.bank.services.CustomerService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Api(tags = SwaggerConstants.ACCOUNT_APIS)
 @RestController
 @RequestMapping("/api/accounts")
 @Slf4j
@@ -30,6 +34,7 @@ public class AccountController {
         this.accountDtoValidation = accountDtoValidation;
     }
 
+    @ApiOperation(SwaggerConstants.GET_ACCOUNTS)
     @GetMapping
     public ResponseEntity<List<AccountToGetDto>> getAccounts() {
         log.info("fetching all the accounts");
@@ -37,6 +42,7 @@ public class AccountController {
         return new ResponseEntity<>(this.accountService.getAllAccounts(), HttpStatus.OK);
     }
 
+    @ApiOperation(SwaggerConstants.CREATE_ACCOUNT)
     @PostMapping("/create/{customerId}")
     public ResponseEntity createAccount(@PathVariable Long customerId, @RequestBody AccountDto accountDto) {
         log.info("inserting new customer");
@@ -57,6 +63,7 @@ public class AccountController {
         return new ResponseEntity<>(this.accountService.createAccount(accountDto, customer), HttpStatus.CREATED);
     }
 
+    @ApiOperation(SwaggerConstants.MAKE_TRANSACTION)
     @PostMapping("/transaction/{accountId}")
     public ResponseEntity transaction(@PathVariable Long accountId, @RequestParam Double amount) {
         log.info("{}", amount >= 0 ? "depositing money" : "withdrawing money");
@@ -76,6 +83,7 @@ public class AccountController {
         return new ResponseEntity<>(this.accountService.transaction(account, amount), HttpStatus.NO_CONTENT);
     }
 
+    @ApiOperation(SwaggerConstants.GET_TRANSACTIONS)
     @GetMapping("/transactions")
     public ResponseEntity<List<TransactionToGetDto>> getAllTransactions() {
         log.info("fetching all the transactions");

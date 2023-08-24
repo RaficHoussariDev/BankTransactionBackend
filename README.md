@@ -18,3 +18,6 @@ This command is going to take care of creating all the containers we need:
 - The database container running on port 5342
 - The database portal (pgAdmin) container running on port 9090
 - The backend application running on port 8080
+
+For more information on the documentation of the APIs, you can visit
+http://localhost:8080/swagger-ui/index.html after running the application.

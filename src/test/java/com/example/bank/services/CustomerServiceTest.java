@@ -30,7 +30,7 @@ public class CustomerServiceTest {
     private CustomerMapper customerMapper;
 
     @Test
-    public void getCustomerByIdTest() {
+    public void get_customer_by_id_test() {
         Customer customerMock = new Customer(1L, "Rafic");
 
         when(this.customerRepository.findById(customerMock.getId())).thenReturn(Optional.of(customerMock));
@@ -47,7 +47,7 @@ public class CustomerServiceTest {
     }
 
     @Test
-    public void saveCustomerTest() {
+    public void save_customer_test() {
         CustomerDto customerDtoMock = new CustomerDto("Kevin");
         Customer customerMock = new Customer(6L, "Kevin");
 

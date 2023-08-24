@@ -37,7 +37,7 @@ public class AccountServiceTest {
     private AccountMapper accountMapper;
 
     @Test
-    public void saveAccountTest() {
+    public void save_account_test() {
         Customer customer = new Customer(1L, "Rafic");
         AccountDto accountDtoMock = new AccountDto(500.0, "New Account");
         Account accountMock = new Account(12L, 500.0, "New Account", customer);
@@ -53,7 +53,7 @@ public class AccountServiceTest {
     }
 
     @Test
-    public void getAccountByIdTest() {
+    public void get_account_by_id_test() {
         Customer customer = new Customer(1L, "Rafic");
         Account accountMock = new Account(11L, 350.0, "Rafic Account", customer);
 
@@ -73,7 +73,7 @@ public class AccountServiceTest {
     }
 
     @Test
-    public void transactionTest() {
+    public void transaction_test() {
         double positiveAmount = 50.0;
         double negativeAmount = -100.0;
 
@@ -91,7 +91,7 @@ public class AccountServiceTest {
     }
 
     @Test
-    public void registerTransactionTest() {
+    public void register_transaction_test() {
         double positiveAmount = 100.0;
         double negativeAmount = -80.0;
 

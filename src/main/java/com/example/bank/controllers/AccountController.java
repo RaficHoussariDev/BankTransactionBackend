@@ -2,6 +2,7 @@ package com.example.bank.controllers;
 
 import com.example.bank.dtos.AccountDto;
 import com.example.bank.dtos.AccountToGetDto;
+import com.example.bank.dtos.TransactionToGetDto;
 import com.example.bank.exceptions.CustomValidationException;
 import com.example.bank.exceptions.DtoValidation;
 import com.example.bank.models.Account;
@@ -73,5 +74,12 @@ public class AccountController {
         }
 
         return new ResponseEntity<>(this.accountService.transaction(account, amount), HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/transactions")
+    public ResponseEntity<List<TransactionToGetDto>> getAllTransactions() {
+        log.info("fetching all the transactions");
+
+        return new ResponseEntity<>(this.accountService.getAllTransactions(), HttpStatus.OK);
     }
 }

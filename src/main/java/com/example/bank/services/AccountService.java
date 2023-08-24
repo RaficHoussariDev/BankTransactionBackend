@@ -2,6 +2,7 @@ package com.example.bank.services;
 
 import com.example.bank.dtos.AccountDto;
 import com.example.bank.dtos.AccountToGetDto;
+import com.example.bank.dtos.TransactionToGetDto;
 import com.example.bank.mappers.AccountMapper;
 import com.example.bank.mappers.TransactionMapper;
 import com.example.bank.models.Account;
@@ -86,5 +87,11 @@ public class AccountService {
         log.info("successfully registered transaction for account {}", account.getId());
 
         return transaction;
+    }
+
+    public List<TransactionToGetDto> getAllTransactions() {
+        List<Transaction> transactions = this.transactionRepository.findAllTransactions();
+
+        return transactions.stream().map(this.transactionMapper::entityToTransactionToGetDto).collect(Collectors.toList());
     }
 }

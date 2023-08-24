@@ -1,5 +1,7 @@
 package com.example.bank.dtos;
 
+import com.example.bank.enums.TransactionEnum;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,9 +9,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AccountToGetDto {
-    private Long id;
+public class TransactionToGetDto {
     private Double amount;
-    private String accountName;
-    private CustomerDto customer;
+    private TransactionEnum type;
+    private AccountToGetDto account;
 }

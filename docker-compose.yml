@@ -1,5 +1,14 @@
 version: '3'
 services:
+  bank:
+    build: .
+    container_name: bank-backend
+    environment:
+      DB_URL: jdbc:postgresql://bank-db:5432/bankdb
+      DB_USER: admin
+      DB_PASSWORD: admin
+    ports:
+      - "8080:8080"
   postgres:
     image: postgres
     container_name: bank-db
